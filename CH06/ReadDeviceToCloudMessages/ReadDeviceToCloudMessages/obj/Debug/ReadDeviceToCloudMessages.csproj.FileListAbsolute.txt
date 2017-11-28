@@ -1,0 +1,8 @@
+D:\OneDrive\ReadDeviceToCloudMessages\ReadDeviceToCloudMessages\bin\Debug\ReadDeviceToCloudMessages.exe.config
+D:\OneDrive\ReadDeviceToCloudMessages\ReadDeviceToCloudMessages\bin\Debug\ReadDeviceToCloudMessages.exe
+D:\OneDrive\ReadDeviceToCloudMessages\ReadDeviceToCloudMessages\bin\Debug\ReadDeviceToCloudMessages.pdb
+D:\OneDrive\ReadDeviceToCloudMessages\ReadDeviceToCloudMessages\bin\Debug\Microsoft.ServiceBus.dll
+D:\OneDrive\ReadDeviceToCloudMessages\ReadDeviceToCloudMessages\bin\Debug\Microsoft.ServiceBus.xml
+D:\OneDrive\ReadDeviceToCloudMessages\ReadDeviceToCloudMessages\obj\Debug\ReadDeviceToCloudMessages.csprojResolveAssemblyReference.cache
+D:\OneDrive\ReadDeviceToCloudMessages\ReadDeviceToCloudMessages\obj\Debug\ReadDeviceToCloudMessages.exe
+D:\OneDrive\ReadDeviceToCloudMessages\ReadDeviceToCloudMessages\obj\Debug\ReadDeviceToCloudMessages.pdb

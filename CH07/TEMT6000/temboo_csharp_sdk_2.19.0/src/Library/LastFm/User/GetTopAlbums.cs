@@ -1,0 +1,113 @@
+using System;
+using Temboo.Core;
+using System.Web.Script.Serialization;
+
+/*
+Copyright 2014 Temboo, Inc.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
+namespace Temboo.Library.LastFm.User
+{
+    /// <summary>
+    /// GetTopAlbums
+    /// Retrieves the top albums listened to by a user.
+    /// </summary>
+    public class GetTopAlbums : Temboo.Core.Choreography
+    {
+
+        /// <summary>
+        /// Create a new instance of the GetTopAlbums Choreo
+        /// </summary>
+        /// <param name="session">A TembooSession object, containing a valid set of Temboo credentials.</param>
+        public GetTopAlbums(TembooSession session) : base(session, "/Library/LastFm/User/GetTopAlbums")
+        {
+        }
+
+         /// <summary>
+         /// (string) Your Last.fm API Key.
+         /// </summary>
+         /// <param name="value">Value of the APIKey input for this Choreo.</param>
+         public void setAPIKey(String value) {
+             base.addInput ("APIKey", value);
+         }
+         /// <summary>
+         /// (optional, integer) The number of results to fetch per page. Defaults to 50.
+         /// </summary>
+         /// <param name="value">Value of the Limit input for this Choreo.</param>
+         public void setLimit(String value) {
+             base.addInput ("Limit", value);
+         }
+         /// <summary>
+         /// (optional, integer) The page number to fetch. Defaults to 1.
+         /// </summary>
+         /// <param name="value">Value of the Page input for this Choreo.</param>
+         public void setPage(String value) {
+             base.addInput ("Page", value);
+         }
+         /// <summary>
+         /// (optional, string) The time period over which to retrieve top albums for. Valid values are: overall, 7day, 3month, 6month, 12month. Defaults to 'overall'.
+         /// </summary>
+         /// <param name="value">Value of the Period input for this Choreo.</param>
+         public void setPeriod(String value) {
+             base.addInput ("Period", value);
+         }
+         /// <summary>
+         /// (string) The Last.fm username to fetch top albums for.
+         /// </summary>
+         /// <param name="value">Value of the User input for this Choreo.</param>
+         public void setUser(String value) {
+             base.addInput ("User", value);
+         }
+
+        /// <summary>
+        /// Execute the Choreo using the specified InputSet as parameters, wait for the Choreo to complete
+        /// and return a ResultSet containing the execution results
+        /// </summary>
+        /// <returns>A GetTopAlbumsResultSet containing execution metadata and results.</returns>
+        new public GetTopAlbumsResultSet execute()
+        {
+            String json = base.getResponseJSON(false, true);
+            GetTopAlbumsResultSet results = new JavaScriptSerializer().Deserialize<GetTopAlbumsResultSet>(json);
+
+            // Note that we may actually have run into an exception while trying to execute
+            // this request; if so, then throw an appropriate exception
+            if (results.Execution.LastError != null)
+            {
+                throw new TembooException(results.Execution.LastError);
+            }
+            return results;
+        }
+
+    }
+
+    /// <summary>
+    /// A ResultSet with methods tailored to the values returned by the GetTopAlbums Choreo
+    /// The ResultSet object is used to retrieve the results of a Choreo execution
+    /// </summary>
+    public class GetTopAlbumsResultSet : Temboo.Core.ResultSet
+    {
+        /// <summary> 
+        /// Retrieve the value for the "Response" output from this Choreo execution
+        /// <returns>String - (XML) The response from Last.fm.</returns>
+        /// </summary>
+        public String Response
+        {
+            get
+            {
+                return (String) base.Output["Response"];
+            }
+        }
+    }
+}
